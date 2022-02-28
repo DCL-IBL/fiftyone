@@ -95,7 +95,21 @@ const ToggleMaximize = React.memo(
   }
 );
 
+const UploadDialog = (props : {categ_name: string}) => {
+    return (
+       <div>
+           <h2>Upload New Image</h2>
+           <form method={"post"} enctype={"multipart/form-data"} action={"http://dcl.bas.bg:1313/upload_file/"} >    
+              <input type={"file"} name={"file"} id={"file"} />
+              <input type={"submit"} value={"Upload"} />
+              <input type={"hidden"} name={"categ_name"} id={"categ_name"} value={props.categ_name} />
+            </form>
+       </div>
+    );
+};
+
 const HorizontalNav = ({ entries }: Props) => {
+  const datasetName = useRecoilValue(selectors.datasetName);
   const { height: windowHeight } = useWindowSize();
   const [activePlot, setActivePlot] = useRecoilState(atoms.activePlot);
   const [expanded, setExpanded] = useState(false);
@@ -168,7 +182,7 @@ const HorizontalNav = ({ entries }: Props) => {
           />
         </NavButtons>
       </Nav>
-      {expanded && <Distributions key={activePlot} group={activePlot} />}
+      {expanded && activePlot === "Upload" ? <UploadDialog categ_name={datasetName}/> : <Distributions key={activePlot} group={activePlot} />}
       {expanded && !maximized && <Drag />}
     </Container>
   );

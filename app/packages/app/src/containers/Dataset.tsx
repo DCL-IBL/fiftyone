@@ -18,7 +18,7 @@ import Loading from "../components/Loading";
 import { useClearModal } from "../recoil/utils";
 import { activeFields } from "../components/Filters/utils";
 
-const PLOTS = ["Sample tags", "Label tags", "Labels", "Other fields"];
+const PLOTS = ["Sample tags", "Label tags", "Labels", "Other fields", "Upload"];
 
 const Container = styled.div`
   height: calc(100% - 74px);
